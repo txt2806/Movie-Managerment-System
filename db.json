@@ -1,0 +1,92 @@
+{
+  "movies": [
+    {
+      "id": "1",
+      "title": "Inception",
+      "genre": "Sci-Fi",
+      "description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project.",
+      "originalPrice": 14.99,
+      "currentPrice": 9.99,
+      "rating": 8.8,
+      "releaseYear": 2010,
+      "image": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=600&auto=format&fit=crop"
+    },
+    {
+      "id": "2",
+      "title": "The Dark Knight",
+      "genre": "Action",
+      "description": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+      "originalPrice": 19.99,
+      "currentPrice": 12.99,
+      "rating": 9.0,
+      "releaseYear": 2008,
+      "image": "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=600&auto=format&fit=crop"
+    },
+    {
+      "id": "3",
+      "title": "Interstellar",
+      "genre": "Sci-Fi",
+      "description": "When Earth becomes uninhabitable, a team of explorers undertakes the most important mission in human history: traveling beyond this galaxy to discover whether mankind has a future among the stars.",
+      "originalPrice": 15.99,
+      "currentPrice": 9.99,
+      "rating": 8.6,
+      "releaseYear": 2014,
+      "image": "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=600&auto=format&fit=crop"
+    },
+    {
+      "id": "4",
+      "title": "Parasite",
+      "genre": "Thriller",
+      "description": "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan, leading to a shocking, blood-soaked ending.",
+      "originalPrice": 12.99,
+      "currentPrice": 7.99,
+      "rating": 8.5,
+      "releaseYear": 2019,
+      "image": "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?q=80&w=600&auto=format&fit=crop"
+    },
+    {
+      "id": "5",
+      "title": "Spirited Away",
+      "genre": "Animation",
+      "description": "During her family's move to the suburbs, a sullen 10-year-old girl wanders into a world ruled by gods, witches, and spirits, and where humans are changed into beasts.",
+      "originalPrice": 14.99,
+      "currentPrice": 10.99,
+      "rating": 8.6,
+      "releaseYear": 2001,
+      "image": "https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=600&auto=format&fit=crop"
+    },
+    {
+      "id": "6",
+      "title": "The Matrix",
+      "genre": "Action",
+      "description": "When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.",
+      "originalPrice": 9.99,
+      "currentPrice": 5.99,
+      "rating": 8.7,
+      "releaseYear": 1999,
+      "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=600&auto=format&fit=crop"
+    },
+    {
+      "id": "7",
+      "title": "Avatar: The Way of Water",
+      "genre": "Adventure",
+      "description": "Jake Sully lives with his newfound family formed on the extrasolar moon Pandora. Once a familiar threat returns to finish what was previously started, Jake must work with Neytiri and the army of the Na'vi race to protect their home.",
+      "originalPrice": 19.99,
+      "currentPrice": 14.99,
+      "rating": 7.6,
+      "releaseYear": 2022,
+      "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop"
+    },
+    {
+      "id": "8",
+      "title": "Django Unchained",
+      "genre": "Drama",
+      "description": "With the help of a German bounty-hunter, a freed slave sets out to rescue his wife from a brutal Mississippi plantation owner, leading to explosive gunslinging action and dynamic dialogues.",
+      "originalPrice": 14.99,
+      "currentPrice": 8.99,
+      "rating": 8.4,
+      "releaseYear": 2012,
+      "image": "https://images.unsplash.com/photo-1533928298208-27ff66555d8d?q=80&w=600&auto=format&fit=crop"
+    }
+  ]
+}
