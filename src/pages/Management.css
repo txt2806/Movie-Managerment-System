@@ -1,0 +1,401 @@
+.management-page {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 3rem 6%;
+}
+
+.management-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.dashboard-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+.btn-add-movie {
+  padding: 0.8rem 1.8rem;
+  font-size: 0.95rem;
+  border-radius: 8px;
+}
+
+/* Stats Summary Row styling */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.stat-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 1.5rem 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.light-mode .stat-card {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.stat-icon-wrapper {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+}
+
+.stat-icon-wrapper.blue {
+  background: rgba(37, 99, 235, 0.12);
+}
+
+.stat-icon-wrapper.purple {
+  background: rgba(124, 58, 237, 0.12);
+}
+
+.stat-icon-wrapper.gold {
+  background: rgba(250, 204, 21, 0.12);
+}
+
+.stat-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin-top: 0.15rem;
+}
+
+.light-mode .stat-value {
+  color: #09090b;
+}
+
+/* Dashboard cards tables section */
+.dashboard-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.dashboard-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  text-align: left;
+}
+
+.section-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.5px;
+}
+
+/* Data table styling */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.data-table th,
+.data-table td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.95rem;
+}
+
+.data-table th {
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.8px;
+}
+
+.data-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.data-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.light-mode .data-table tbody tr:hover {
+  background: rgba(0, 0, 0, 0.015);
+}
+
+.movie-title-cell {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.light-mode .movie-title-cell {
+  color: #09090b;
+}
+
+.table-poster-thumb {
+  width: 38px;
+  height: 52px;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.light-mode .table-poster-thumb {
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.price-cell {
+  font-weight: 800;
+  color: var(--accent-red);
+}
+
+.success-color {
+  color: var(--accent-emerald) !important;
+}
+
+/* Status badges */
+.status-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.status-badge.active {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--accent-emerald);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+/* Table cells helpers */
+.seats-cell {
+  font-weight: 700;
+  color: var(--accent-gold);
+}
+
+.customer-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.customer-cell .name {
+  font-weight: 700;
+}
+
+.customer-cell .email {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.code-cell {
+  font-family: monospace;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.light-mode .code-cell {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* Actions cell editing buttons */
+.actions-cell {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.action-btn-icon {
+  background: transparent;
+  border: none;
+  font-size: 1.15rem;
+  cursor: pointer;
+  padding: 0.3rem;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.action-btn-icon:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.light-mode .action-btn-icon:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+@media (max-width: 768px) {
+  .management-page {
+    padding: 2rem 4%;
+  }
+  .dashboard-title {
+    font-size: 1.8rem;
+  }
+}
+
+/* Tabs for Dashboard */
+.management-tabs {
+  display: flex;
+  gap: 1rem;
+  border-bottom: 2px solid var(--card-border);
+  margin-bottom: 2rem;
+  padding-bottom: 2px;
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.25s ease;
+  font-family: var(--heading);
+}
+
+.tab-btn:hover {
+  color: #ffffff;
+}
+
+.light-mode .tab-btn:hover {
+  color: #09090b;
+}
+
+.tab-btn.active {
+  color: var(--accent-red);
+}
+
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-red);
+}
+
+/* Pagination controls */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1.5rem;
+}
+
+.page-nav-btn {
+  background: transparent;
+  border: 1px solid var(--card-border);
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.page-nav-btn:hover:not(:disabled) {
+  background: var(--accent-red);
+  color: #09090b;
+  border-color: var(--accent-red);
+}
+
+.page-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.page-numbers {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.page-num-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-color);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.light-mode .page-num-btn {
+  background: #ffffff;
+}
+
+.page-num-btn:hover {
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+}
+
+.page-num-btn.active {
+  background: var(--accent-red);
+  color: #09090b;
+  border-color: var(--accent-red);
+}
+
+/* Fade-in animations */
+.animate-fade-in {
+  animation: fadeIn 0.35s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+

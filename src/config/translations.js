@@ -1,8 +1,10 @@
 export const translations = {
   en: {
     // Navbar
-    navBrowse: "Browse",
+    navBrowse: "Home",
     navAdd: "Add Movie",
+    navBookings: "My Bookings",
+    navManagement: "Management",
     navLogout: "Sign Out",
     navWelcome: "Welcome,",
     navRoleAdmin: "Admin",
@@ -24,10 +26,10 @@ export const translations = {
     loginErrorPassLength: "Password must be at least 4 characters",
 
     // Browse Page
-    heroPlay: "Play",
+    heroPlay: "Book Now",
     heroMoreInfo: "More Info",
     browseTrending: "Trending Now",
-    browsePopular: "Popular on Netflix",
+    browsePopular: "Popular",
     browseSciFi: "Sci-Fi Thrillers",
     browseAction: "High-Octane Action",
     browseOther: "All Recommended Releases",
@@ -95,12 +97,44 @@ export const translations = {
     errCurrPriceReq: "Current price is required",
     errCurrPriceInvalid: "Price must be a positive number",
     errSystemError: "System Error:",
-    formLoading: "Retrieving movie specifications..."
+    formLoading: "Retrieving movie specifications...",
+
+    // Seating and Booking Page
+    bookingTitle: "Book Movie Tickets",
+    bookingSelectCinema: "Select Cinema",
+    bookingSelectDate: "Select Date",
+    bookingSelectShowtime: "Select Showtime",
+    bookingScreen: "SCREEN",
+    bookingStandard: "Standard",
+    bookingVip: "VIP (+ $2.00)",
+    bookingCouple: "Couple",
+    bookingSelected: "Selected",
+    bookingSold: "Sold",
+    bookingLegend: "Seat Legend",
+    bookingSummary: "Booking Summary",
+    bookingCinema: "Cinema",
+    bookingShowtime: "Showtime",
+    bookingSeatsSelected: "Selected Seats",
+    bookingNoSeats: "No seats selected",
+    bookingPricePerTicket: "Ticket Base Price",
+    bookingSurcharges: "VIP Seat Surcharge",
+    bookingTotal: "Total Amount",
+    bookingConfirmBtn: "Confirm & Pay",
+    bookingSuccessTitle: "Booking Confirmed!",
+    bookingSuccessMsg: "Your tickets have been successfully booked. You can view your receipt details below or in your Booking History.",
+    bookingCodeLabel: "Booking Code",
+    bookingHistoryTitle: "My Bookings History",
+    bookingHistoryEmpty: "You have not booked any tickets yet. Browse movies to make your first booking!",
+    bookingBackHome: "Back to Browse",
+    bookingDateBooked: "Booked On",
+    bookingSeatLabel: "Seats"
   },
   vi: {
     // Navbar
-    navBrowse: "Duyệt Phim",
+    navBrowse: "Trang chủ",
     navAdd: "Thêm Phim",
+    navBookings: "Vé Đã Đặt",
+    navManagement: "Quản lý",
     navLogout: "Đăng Xuất",
     navWelcome: "Chào mừng,",
     navRoleAdmin: "Quản trị viên",
@@ -122,10 +156,10 @@ export const translations = {
     loginErrorPassLength: "Mật khẩu phải dài ít nhất 4 ký tự",
 
     // Browse Page
-    heroPlay: "Phát",
-    heroMoreInfo: "Thông tin khác",
+    heroPlay: "Đặt vé ngay",
+    heroMoreInfo: "Xem thêm",
     browseTrending: "Xu hướng hiện nay",
-    browsePopular: "Phổ biến trên Netflix",
+    browsePopular: "Phổ biến",
     browseSciFi: "Phim Viễn Tưởng Kịch Tính",
     browseAction: "Hành Động Nghẹt Thở",
     browseOther: "Tất Cả Phim Đề Xuất",
@@ -193,6 +227,36 @@ export const translations = {
     errCurrPriceReq: "Giá hiện tại là bắt buộc",
     errCurrPriceInvalid: "Giá phải là một số dương",
     errSystemError: "Lỗi hệ thống:",
-    formLoading: "Đang truy xuất thông số phim..."
+    formLoading: "Đang truy xuất thông số phim...",
+
+    // Seating and Booking Page
+    bookingTitle: "Đặt Vé Xem Phim",
+    bookingSelectCinema: "Chọn Cụm Rạp",
+    bookingSelectDate: "Chọn Ngày",
+    bookingSelectShowtime: "Chọn Suất Chiếu",
+    bookingScreen: "MÀN HÌNH",
+    bookingStandard: "Thường",
+    bookingVip: "VIP (+ $2.00)",
+    bookingCouple: "Ghế Đôi",
+    bookingSelected: "Đang Chọn",
+    bookingSold: "Đã Bán",
+    bookingLegend: "Chú Thích Ghế",
+    bookingSummary: "Tóm Tắt Đơn Hàng",
+    bookingCinema: "Rạp Chiếu",
+    bookingShowtime: "Suất Chiếu",
+    bookingSeatsSelected: "Ghế Đã Chọn",
+    bookingNoSeats: "Chưa chọn ghế",
+    bookingPricePerTicket: "Giá Vé Gốc",
+    bookingSurcharges: "Phụ Thu Ghế VIP",
+    bookingTotal: "Tổng Cộng",
+    bookingConfirmBtn: "Xác Nhận Đặt Vé",
+    bookingSuccessTitle: "Đặt Vé Thành Công!",
+    bookingSuccessMsg: "Vé của bạn đã được đặt thành công. Bạn có thể xem chi tiết hóa đơn bên dưới hoặc trong Lịch sử Đặt vé.",
+    bookingCodeLabel: "Mã Đặt Vé",
+    bookingHistoryTitle: "Lịch Sử Đặt Vé Của Tôi",
+    bookingHistoryEmpty: "Bạn chưa đặt vé nào. Hãy duyệt phim để thực hiện giao dịch đầu tiên!",
+    bookingBackHome: "Quay lại Trang Chủ",
+    bookingDateBooked: "Ngày Đặt",
+    bookingSeatLabel: "Danh sách ghế"
   }
 };

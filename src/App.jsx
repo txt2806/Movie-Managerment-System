@@ -5,6 +5,9 @@ import MovieList from './pages/MovieList';
 import MovieDetail from './pages/MovieDetail';
 import MovieForm from './pages/MovieForm';
 import Login from './pages/Login';
+import Booking from './pages/Booking';
+import BookingHistory from './pages/BookingHistory';
+import Management from './pages/Management';
 import './App.css';
 
 // Component to protect authenticated routes
@@ -72,8 +75,32 @@ function App() {
               </ProtectedRoute>
             } 
           />
+          <Route 
+            path="/booking/:movieId" 
+            element={
+              <ProtectedRoute>
+                <Booking />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/bookings" 
+            element={
+              <ProtectedRoute>
+                <BookingHistory />
+              </ProtectedRoute>
+            } 
+          />
 
           {/* Admin-only authenticated routes */}
+          <Route 
+            path="/management" 
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <Management />
+              </ProtectedRoute>
+            } 
+          />
           <Route 
             path="/add" 
             element={

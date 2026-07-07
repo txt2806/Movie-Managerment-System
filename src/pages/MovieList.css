@@ -254,6 +254,16 @@
   background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
 }
 
+.genre-select option {
+  background-color: #121216;
+  color: #ffffff;
+}
+
+.light-mode .genre-select option {
+  background-color: #ffffff;
+  color: #111827;
+}
+
 .genre-select:focus {
   border-color: var(--accent-red);
   box-shadow: 0 0 15px rgba(229, 9, 20, 0.25);
@@ -298,7 +308,9 @@
   gap: 1.25rem;
   overflow-x: auto;
   overflow-y: hidden;
-  padding: 1.25rem 0.25rem 2rem 0.25rem;
+  padding: 40px 0.25rem 80px 0.25rem;
+  margin-top: -40px;
+  margin-bottom: -70px;
   scroll-behavior: smooth;
   scrollbar-width: none;
 }
@@ -307,221 +319,400 @@
   display: none;
 }
 
-.row-posters .movie-card-link {
+.row-posters .movie-card-container {
   flex: 0 0 270px;
   max-width: 270px;
 }
 
-/* Premium Movie Card (Hover Reveal Design) */
-.movie-card {
+/* Movie Card Container (Supports Normal Card & Hover Popup) */
+.movie-card-container {
   position: relative;
-  background: #121216;
-  border-radius: 12px;
-  overflow: hidden;
-  height: 380px; /* Standard poster visual height */
+  width: 100%;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Static Base Card Styles */
+.movie-card-base {
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, border-color 0.4s ease;
-  cursor: pointer;
-}
-
-.light-mode .movie-card {
-  background: #ffffff;
-  border-color: rgba(0, 0, 0, 0.08);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-}
-
-.movie-card:hover {
-  transform: scale(1.08) translateY(-5px);
-  border-color: var(--accent-red);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85), 0 0 25px rgba(229, 9, 20, 0.2);
-}
-
-.light-mode .movie-card:hover {
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), 0 0 15px rgba(229, 9, 20, 0.1);
-}
-
-/* Image wrapper fills card by default */
-.card-image-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
+  text-decoration: none;
+  background: transparent;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  background: #000;
-  z-index: 1;
+  transition: transform 0.3s ease;
 }
 
-.card-image {
+.movie-card-base .card-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.light-mode .movie-card-base .card-image-wrapper {
+  background: #e2e8f0;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.movie-card-base .card-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease, filter 0.5s ease;
+  transition: transform 0.3s ease;
 }
 
-.movie-card:hover .card-image {
-  transform: scale(1.05);
-  filter: blur(2px) brightness(0.4);
+.movie-card-base:hover .card-image-wrapper {
+  border-color: var(--accent-red);
+  box-shadow: 0 12px 28px rgba(229, 9, 20, 0.3);
 }
 
-.card-rating {
+.movie-card-base:hover .card-image {
+  transform: scale(1.03);
+}
+
+/* Badge bottom left inside image */
+.card-badge-bottom,
+.popup-badge-bottom {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  background: rgba(12, 12, 16, 0.85);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.8rem;
-  font-weight: 800;
-  color: var(--accent-gold);
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  gap: 0.2rem;
-}
-
-.card-genre-tag {
-  position: absolute;
-  top: 0.75rem;
+  bottom: 0.75rem;
   left: 0.75rem;
-  background: var(--accent-red);
-  padding: 0.25rem 0.55rem;
+  background: rgba(26, 26, 36, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 6px;
-  font-size: 0.7rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  z-index: 3;
-}
-
-/* Content overlays the poster and reveals on hover */
-.card-content {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 5;
-  background: linear-gradient(to top, rgba(7, 7, 10, 0.98) 0%, rgba(7, 7, 10, 0.9) 70%, rgba(7, 7, 10, 0) 100%);
-  padding: 2.5rem 1.2rem 1.2rem 1.2rem;
-  display: flex;
-  flex-direction: column;
-  /* Shift down by default so only Title is visible */
-  transform: translateY(115px);
-  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), background-color 0.4s ease;
-}
-
-.light-mode .card-content {
-  background: linear-gradient(to top, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.9) 70%, rgba(255, 255, 255, 0) 100%);
-}
-
-.movie-card:hover .card-content {
-  transform: translateY(0);
-  background: linear-gradient(to top, rgba(7, 7, 10, 0.98) 0%, rgba(7, 7, 10, 0.92) 80%, rgba(7, 7, 10, 0.6) 100%);
-}
-
-.light-mode .movie-card:hover .card-content {
-  background: linear-gradient(to top, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.92) 80%, rgba(255, 255, 255, 0.6) 100%);
-}
-
-.card-meta {
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  margin-bottom: 0.35rem;
-}
-
-.card-title {
-  font-size: 1.2rem;
+  padding: 0.25rem 0.55rem;
+  font-size: 0.75rem;
   font-weight: 800;
   color: #ffffff;
-  margin: 0 0 0.5rem 0;
-  line-height: 1.2;
+  z-index: 3;
+  letter-spacing: 0.5px;
+}
+
+.light-mode .card-badge-bottom,
+.light-mode .popup-badge-bottom {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #111827;
+}
+
+/* Info section below base image */
+.card-info-bottom {
+  padding: 0.75rem 0.25rem;
+  text-align: left;
+}
+
+.card-title-base {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--heading);
+}
+
+.light-mode .card-title-base {
+  color: #111827;
+}
+
+.card-subtitle-base {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.light-mode .card-title {
+/* Detailed Hover Popup Design (Netflix Style) */
+.movie-card-hover-popup {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  width: 100%;
+  background: #18181c;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transform: scale(0.85) translateY(10px);
+  transition: opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
+              transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
+              visibility 0.3s;
+}
+
+.light-mode .movie-card-hover-popup {
+  background: #ffffff;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+/* Activate hover details on container hover */
+.movie-card-container:hover {
+  z-index: 200; /* Ensure active hover card overlays normal elements */
+}
+
+.movie-card-container:hover .movie-card-hover-popup {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transform: scale(1.05) translateY(-5px);
+}
+
+/* Hover popup image wrapper */
+.popup-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.popup-image-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(to top, #18181c 0%, rgba(24, 24, 28, 0) 100%);
+}
+
+.light-mode .popup-image-wrapper::after {
+  background: linear-gradient(to top, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.popup-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.popup-image-wrapper:hover .popup-image {
+  transform: scale(1.04);
+}
+
+/* Hover popup details layout */
+.popup-details {
+  padding: 1.2rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--heading);
+}
+
+.light-mode .popup-title {
   color: #111827;
 }
 
-.card-desc {
-  font-size: 0.82rem;
-  line-height: 1.4;
-  color: rgba(255, 255, 255, 0.65);
-  margin-bottom: 1.25rem;
-  text-align: left;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+.popup-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0.15rem 0 1rem 0;
+  white-space: nowrap;
   overflow: hidden;
-  height: 3.4em; /* Match line clamp limit height */
+  text-overflow: ellipsis;
 }
 
-.light-mode .card-desc {
+/* Button layout inside hover details popup */
+.popup-buttons-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.2rem;
+}
+
+/* Yellow primary Play button */
+.popup-btn-play {
+  flex-grow: 1;
+  background: #ffc107;
+  color: #000000;
+  border: none;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 0.55rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.popup-btn-play:hover {
+  background: #e0a800;
+  transform: scale(1.02);
+}
+
+.play-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Action button styling (Heart, Info) */
+.popup-btn-action {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.light-mode .popup-btn-action {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.18);
+  color: #111827;
+}
+
+.popup-btn-action:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: #ffffff;
+  transform: scale(1.08);
+}
+
+.light-mode .popup-btn-action:hover {
+  background: rgba(0, 0, 0, 0.08);
+  border-color: #000000;
+}
+
+.action-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+/* Persisted Liked Action Button */
+.popup-btn-action.btn-like.liked {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: #ef4444;
+  color: #ef4444;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.25);
+}
+
+/* Metadata badges row */
+.popup-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.popup-tags-row span {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+/* IMDb Rating Badge */
+.popup-tags-row .badge-imdb {
+  background: rgba(255, 184, 0, 0.12);
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+/* General detail tags */
+.popup-tags-row .badge-age,
+.popup-tags-row .badge-year,
+.popup-tags-row .badge-status,
+.popup-tags-row .badge-complete {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.light-mode .popup-tags-row .badge-age,
+.light-mode .popup-tags-row .badge-year,
+.light-mode .popup-tags-row .badge-status,
+.light-mode .popup-tags-row .badge-complete {
+  background: rgba(0, 0, 0, 0.05);
+  color: #374151;
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+/* Dot Separated Genre Display */
+.popup-genres {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #c5c9d0;
+  line-height: 1.4;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+.light-mode .popup-genres {
   color: #4b5563;
 }
 
-.card-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* Admin popup delete container */
+.popup-admin-row {
+  margin-top: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-top: 0.85rem;
+  display: flex;
 }
 
-.light-mode .card-bottom {
+.light-mode .popup-admin-row {
   border-top-color: rgba(0, 0, 0, 0.08);
 }
 
-.card-pricing {
-  display: flex;
-  align-items: baseline;
-  gap: 0.4rem;
-}
-
-.original-price {
-  font-size: 0.8rem;
-  text-decoration: line-through;
-  color: var(--text-muted);
-}
-
-.current-price {
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: var(--accent-emerald);
-}
-
-/* Delete Button */
-.btn-delete {
+.btn-delete-popup {
   background: transparent;
-  border: 1px solid rgba(239, 68, 68, 0.3);
+  border: 1px solid rgba(239, 68, 68, 0.35);
   color: #ef4444;
-  width: 2.1rem;
-  height: 2.1rem;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
+  padding: 0.45rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: inline-flex;
   align-items: center;
+  gap: 0.4rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  width: 100%;
+  justify-content: center;
 }
 
-.btn-delete svg {
-  width: 1.1rem;
-  height: 1.1rem;
-}
-
-.btn-delete:hover {
+.btn-delete-popup:hover {
   background: #ef4444;
-  border-color: #ef4444;
   color: #ffffff;
-  box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.3);
+}
+
+.delete-icon {
+  width: 1rem;
+  height: 1rem;
 }
 
 /* Search results standard grid */
@@ -532,8 +723,8 @@
   padding: 1rem 0;
 }
 
-.movie-grid .movie-card-link {
-  height: 380px;
+.movie-grid .movie-card-container {
+  height: 420px;
 }
 
 /* Animations & Skeletons */
@@ -592,3 +783,87 @@
     padding: 0 4% 3rem 4%;
   }
 }
+
+/* Category Gradient Cards ("Bạn đang quan tâm gì?") */
+.interest-section {
+  padding: 2.5rem 6% 1rem 6%;
+  text-align: left;
+}
+
+.interest-section-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 1.25rem;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+}
+
+.light-mode .interest-section-title {
+  color: #09090b;
+}
+
+.interest-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 1.25rem;
+}
+
+.interest-card {
+  height: 120px;
+  border-radius: 16px;
+  border: none;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.interest-card:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+  filter: brightness(1.1);
+}
+
+.interest-card h3 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 0.15rem 0;
+}
+
+.interest-card span {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.5px;
+}
+
+/* Card Gradient Themes */
+.card-scifi {
+  background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);
+}
+
+.card-action {
+  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+}
+
+.card-thriller {
+  background: linear-gradient(135deg, #b45309 0%, #d97706 100%);
+}
+
+.card-animation {
+  background: linear-gradient(135deg, #db2777 0%, #e11d48 100%);
+}
+
+.card-drama {
+  background: linear-gradient(135deg, #701a75 0%, #a21caf 100%);
+}
+
+.card-adventure {
+  background: linear-gradient(135deg, #059669 0%, #0d9488 100%);
+}
+

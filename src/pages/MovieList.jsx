@@ -71,10 +71,10 @@ export default function MovieList() {
             <p className="hero-desc">{featuredMovie.description}</p>
             <div className="hero-buttons">
               <button 
-                onClick={() => navigate(`/movies/${featuredMovie.id}`)} 
+                onClick={() => navigate(`/booking/${featuredMovie.id}`)} 
                 className="btn-hero-play"
               >
-                ▶ {t('heroPlay')}
+                🎟️ {t('heroPlay')}
               </button>
               <button 
                 onClick={() => navigate(`/movies/${featuredMovie.id}`)} 
@@ -83,6 +83,63 @@ export default function MovieList() {
                 ⓘ {t('heroMoreInfo')}
               </button>
             </div>
+          </div>
+        </section>
+      )}
+
+      {/* Category Gradient Row (Bạn đang quan tâm gì?) */}
+      {!searchTerm && selectedGenre === 'All' && (
+        <section className="interest-section">
+          <h2 className="interest-section-title">Bạn đang quan tâm gì?</h2>
+          <div className="interest-cards-grid">
+            <button 
+              type="button" 
+              onClick={() => setSelectedGenre('Sci-Fi')} 
+              className="interest-card card-scifi"
+            >
+              <h3>Viễn Tưởng</h3>
+              <span>Xem chủ đề ›</span>
+            </button>
+            <button 
+              type="button" 
+              onClick={() => setSelectedGenre('Action')} 
+              className="interest-card card-action"
+            >
+              <h3>Hành Động</h3>
+              <span>Xem chủ đề ›</span>
+            </button>
+            <button 
+              type="button" 
+              onClick={() => setSelectedGenre('Thriller')} 
+              className="interest-card card-thriller"
+            >
+              <h3>Kinh Dị</h3>
+              <span>Xem chủ đề ›</span>
+            </button>
+            <button 
+              type="button" 
+              onClick={() => setSelectedGenre('Animation')} 
+              className="interest-card card-animation"
+            >
+              <h3>Hoạt Hình</h3>
+              <span>Xem chủ đề ›</span>
+            </button>
+            <button 
+              type="button" 
+              onClick={() => setSelectedGenre('Drama')} 
+              className="interest-card card-drama"
+            >
+              <h3>Cổ Trang</h3>
+              <span>Xem chủ đề ›</span>
+            </button>
+            <button 
+              type="button" 
+              onClick={() => setSelectedGenre('Adventure')} 
+              className="interest-card card-adventure"
+            >
+              <h3>Chiến Tranh</h3>
+              <span>Xem chủ đề ›</span>
+            </button>
           </div>
         </section>
       )}
@@ -249,9 +306,48 @@ export default function MovieList() {
 
 // Subcomponent for Movie Card (satisfies SRP and ISP)
 function MovieCard({ movie, isAdmin, handleDelete }) {
+  const navigate = useNavigate();
+  const [liked, setLiked] = useState(() => {
+    const saved = localStorage.getItem(`liked_${movie.id}`);
+    return saved === 'true';
+  });
+
+  const toggleLike = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const newLiked = !liked;
+    setLiked(newLiked);
+    localStorage.setItem(`liked_${movie.id}`, String(newLiked));
+  };
+
+  // Vietnamese subtitle lookup for authentic look matching reference
+  const vnSubtitles = {
+    "1": "Kẻ Kiến Tạo Giấc Mơ",
+    "2": "Kỵ Sĩ Bóng Đêm",
+    "3": "Hố Đen Tử Thần",
+    "4": "Ký Sinh Trùng",
+    "5": "Vùng Đất Linh Hồn",
+    "6": "Ma Trận",
+    "7": "Dòng Chảy Của Nước",
+    "8": "Hành Trình Django"
+  };
+  const subTitle = vnSubtitles[movie.id] || movie.title;
+
+  // Extended genres for dot-separated list matching reference
+  const genreMap = {
+    "Sci-Fi": "Khoa Học • Viễn Tưởng • Kịch Tính",
+    "Action": "Hành Động • Phiêu Lưu • Kịch Tính",
+    "Thriller": "Gây Cấn • Kinh Dị • Tâm Lý",
+    "Animation": "Hoạt Hình • Phiêu Lưu • Gia Đình",
+    "Adventure": "Phiêu Lưu • Giả Tưởng • Hành Động",
+    "Drama": "Chính Kịch • Tâm Lý • Cổ Điển"
+  };
+  const dotGenres = genreMap[movie.genre] || `${movie.genre} • Chiếu Rạp • Hay`;
+
   return (
-    <Link to={`/movies/${movie.id}`} className="movie-card-link">
-      <article className="movie-card">
+    <div className="movie-card-container">
+      {/* Static Base Card */}
+      <Link to={`/movies/${movie.id}`} className="movie-card-base">
         <div className="card-image-wrapper">
           <img
             src={movie.image || '/favicon.svg'}
@@ -262,45 +358,109 @@ function MovieCard({ movie, isAdmin, handleDelete }) {
               e.target.src = 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=600&auto=format&fit=crop';
             }}
           />
-          <div className="card-rating">
-            <span className="star">★</span> {movie.rating}
+          <div className="card-badge-bottom">
+            <span>P.Đ. {movie.rating}</span>
           </div>
-          <span className="card-genre-tag">{movie.genre}</span>
         </div>
-        <div className="card-content">
-          <div className="card-meta">
-            <span className="card-year">{movie.releaseYear}</span>
+        <div className="card-info-bottom">
+          <h3 className="card-title-base">{movie.title}</h3>
+          <p className="card-subtitle-base">{subTitle}</p>
+        </div>
+      </Link>
+
+      {/* Hover Detailed Popup Card */}
+      <div className="movie-card-hover-popup">
+        <div className="popup-image-wrapper" onClick={() => navigate(`/movies/${movie.id}`)}>
+          <img
+            src={movie.image || '/favicon.svg'}
+            alt={movie.title}
+            className="popup-image"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=600&auto=format&fit=crop';
+            }}
+          />
+          <div className="popup-badge-bottom">
+            <span>P.Đ. {movie.rating}</span>
           </div>
-          <h3 className="card-title">{movie.title}</h3>
-          <p className="card-desc">
-            {movie.description.length > 70
-              ? `${movie.description.substring(0, 67)}...`
-              : movie.description}
-          </p>
-          
-          <div className="card-bottom">
-            <div className="card-pricing">
-              {movie.originalPrice && movie.originalPrice > movie.currentPrice && (
-                <span className="original-price">${movie.originalPrice.toFixed(2)}</span>
-              )}
-              <span className="current-price">${movie.currentPrice.toFixed(2)}</span>
-            </div>
-            
-            {isAdmin && (
+        </div>
+
+        <div className="popup-details">
+          <h4 className="popup-title">{movie.title}</h4>
+          <p className="popup-subtitle">{subTitle}</p>
+
+          {/* Action Buttons Row */}
+          <div className="popup-buttons-row">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                navigate(`/booking/${movie.id}`);
+              }}
+              className="popup-btn-play"
+            >
+              <svg className="play-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              Xem ngay
+            </button>
+
+            <button
+              onClick={toggleLike}
+              className={`popup-btn-action btn-like ${liked ? 'liked' : ''}`}
+              title="Thích"
+            >
+              <svg className="action-icon" viewBox="0 0 24 24" fill={liked ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+              </svg>
+            </button>
+
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                navigate(`/movies/${movie.id}`);
+              }}
+              className="popup-btn-action btn-info"
+              title="Chi tiết"
+            >
+              <svg className="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12.01" y2="8" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Badges/Tags Row */}
+          <div className="popup-tags-row">
+            <span className="badge-imdb">IMDb {movie.rating.toFixed(1)}</span>
+            <span className="badge-age">{movie.rating >= 8.5 || movie.genre === 'Action' ? 'T16' : 'PG-13'}</span>
+            <span className="badge-year">{movie.releaseYear}</span>
+            <span className="badge-status">Phần 1</span>
+            <span className="badge-complete">Tập Hoàn Tất</span>
+          </div>
+
+          {/* Genres */}
+          <p className="popup-genres">{dotGenres}</p>
+
+          {/* Admin Delete Action */}
+          {isAdmin && (
+            <div className="popup-admin-row">
               <button
                 onClick={(e) => handleDelete(e, movie.id, movie.title)}
-                className="btn-delete"
-                aria-label={`Delete ${movie.title}`}
-                title="Delete movie"
+                className="btn-delete-popup"
+                title="Xóa phim"
               >
-                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" className="delete-icon">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                 </svg>
+                Xóa phim
               </button>
-            )}
-          </div>
+            </div>
+          )}
         </div>
-      </article>
-    </Link>
+      </div>
+    </div>
   );
 }

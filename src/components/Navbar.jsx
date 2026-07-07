@@ -14,7 +14,11 @@ export default function Navbar() {
       <div className="navbar-container">
         <div className="navbar-left">
           <Link to="/" className="navbar-logo">
-            <span>Cine</span>Sphere
+            <svg className="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="10" fill="#FACC15"/>
+              <polygon points="10,8 16,12 10,16" fill="#09090b"/>
+            </svg>
+            <span>Movie</span>Management
           </Link>
           <ul className="navbar-menu">
             <li className="nav-item">
@@ -26,13 +30,21 @@ export default function Navbar() {
                 {t('navBrowse')}
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink 
+                to="/bookings" 
+                className={({ isActive }) => `nav-links ${isActive ? 'active' : ''}`}
+              >
+                {t('navBookings')}
+              </NavLink>
+            </li>
             {isAdmin && (
               <li className="nav-item">
                 <NavLink 
-                  to="/add" 
+                  to="/management" 
                   className={({ isActive }) => `nav-links ${isActive ? 'active' : ''}`}
                 >
-                  {t('navAdd')}
+                  {t('navManagement')}
                 </NavLink>
               </li>
             )}
@@ -65,12 +77,16 @@ export default function Navbar() {
           {/* Profile details */}
           {session && (
             <div className="navbar-profile">
-              <div className="profile-info">
-                <span className="profile-welcome">{t('navWelcome')}</span>
-                <span className="profile-name">{session.email}</span>
-                <span className={`role-badge ${session.role}`}>
-                  {session.role === 'admin' ? t('navRoleAdmin') : t('navRoleUser')}
-                </span>
+              <div className="profile-pill">
+                <svg className="profile-icon" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                <div className="profile-info">
+                  <span className="profile-name">{session.username || session.email}</span>
+                  <span className={`role-badge ${session.role}`}>
+                    {session.role === 'admin' ? t('navRoleAdmin') : t('navRoleUser')}
+                  </span>
+                </div>
               </div>
               <button onClick={logout} className="btn-logout" title={t('navLogout')}>
                 {t('navLogout')}

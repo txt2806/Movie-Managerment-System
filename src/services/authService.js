@@ -5,7 +5,6 @@ export const authService = {
       setTimeout(() => {
         const u = username.toLowerCase().trim();
         
-        // Define admin and user credential rules (no hardcoded passwords inside components)
         if ((u === 'admin' || u === 'admin@cinesphere.com') && password === 'admin') {
           const session = { username: 'Admin User', email: u, role: 'admin', token: 'mock-jwt-admin-token' };
           localStorage.setItem('auth_session', JSON.stringify(session));

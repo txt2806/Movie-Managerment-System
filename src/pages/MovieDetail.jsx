@@ -103,19 +103,34 @@ export default function MovieDetail() {
             <p className="detail-plot">{currentMovie.description}</p>
           </div>
 
-          <div className="detail-section pricing-section">
-            <h3 className="section-label">{t('detailAvailability')}</h3>
-            <div className="detail-pricing">
-              {currentMovie.originalPrice && currentMovie.originalPrice > currentMovie.currentPrice && (
-                <div className="price-item original">
-                  <span className="price-label">{t('detailRegPrice')}</span>
-                  <span className="price-val">${currentMovie.originalPrice.toFixed(2)}</span>
+          <div className="detail-section booking-section-figma">
+            <div className="price-tag-row">
+              <span className="price-label">Giá vé:</span>
+              <span className="price-val-gold">${currentMovie.currentPrice.toFixed(2)}</span>
+            </div>
+            
+            <h3 className="section-label">Lịch Chiếu & Đặt Vé</h3>
+            <div className="detail-cinemas-list">
+              {[
+                { name: 'CGV Vincom Center', times: ['10:15', '12:30', '15:00', '17:15', '19:30', '21:45'] },
+                { name: 'Lotte Cinema Landmark', times: ['12:30', '15:00', '17:15', '19:30'] },
+                { name: 'BHD Star Thao Dien', times: ['10:15', '15:00', '19:30', '21:45'] }
+              ].map((cinema) => (
+                <div key={cinema.name} className="cinema-showtimes-row">
+                  <h4 className="cinema-row-name">{cinema.name}</h4>
+                  <div className="showtimes-grid">
+                    {cinema.times.map((time) => (
+                      <Link 
+                        key={time} 
+                        to={`/booking/${currentMovie.id}?cinema=${encodeURIComponent(cinema.name)}&time=${time}`}
+                        className="showtime-slot-btn"
+                      >
+                        {time}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-              )}
-              <div className="price-item current">
-                <span className="price-label">{t('detailOfferPrice')}</span>
-                <span className="price-val">${currentMovie.currentPrice.toFixed(2)}</span>
-              </div>
+              ))}
             </div>
           </div>
 

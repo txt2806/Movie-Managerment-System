@@ -1,32 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-  --bg-color: #07070a;
-  --bg-gradient: radial-gradient(circle at 50% 0%, #1a101f 0%, #07070a 100%);
-  --card-bg: rgba(20, 20, 25, 0.6);
-  --card-border: rgba(255, 255, 255, 0.05);
-  --text-color: #f3f4f6;
-  --text-muted: #9ca3af;
-  --accent-red: #e50914;
-  --accent-red-glow: rgba(229, 9, 20, 0.4);
-  --accent-gold: #ffb800;
-  --accent-emerald: #00e676;
-  --border-color: rgba(255, 255, 255, 0.06);
+  --bg-color: #09090b;
+  --bg-gradient: radial-gradient(circle at 50% 0%, #18181b 0%, #09090b 100%);
+  --card-bg: #18181b;
+  --card-border: #27272a;
+  --text-color: #ffffff;
+  --text-muted: #a1a1aa;
+  --accent-red: #facc15;
+  --accent-red-glow: rgba(250, 204, 21, 0.25);
+  --accent-gold: #facc15;
+  --accent-emerald: #10b981;
+  --border-color: #27272a;
   
   --sans: 'Inter', sans-serif;
   --heading: 'Outfit', sans-serif;
 }
 
 .light-mode {
-  --bg-color: #f4f4f7;
-  --bg-gradient: radial-gradient(circle at 50% 0%, #eaeaf0 0%, #f4f4f7 100%);
-  --card-bg: rgba(255, 255, 255, 0.9);
-  --card-border: rgba(0, 0, 0, 0.06);
-  --text-color: #111827;
-  --text-muted: #6b7280;
-  --border-color: rgba(0, 0, 0, 0.08);
-  --accent-red: #e50914;
-  --accent-red-glow: rgba(229, 9, 20, 0.2);
+  --bg-color: #f4f4f5;
+  --bg-gradient: radial-gradient(circle at 50% 0%, #e4e4e7 0%, #f4f4f5 100%);
+  --card-bg: #ffffff;
+  --card-border: #e4e4e7;
+  --text-color: #09090b;
+  --text-muted: #71717a;
+  --border-color: #e4e4e7;
+  --accent-red: #d97706; /* Amber-600 for light mode contrast */
+  --accent-red-glow: rgba(217, 119, 6, 0.2);
 }
 
 * {

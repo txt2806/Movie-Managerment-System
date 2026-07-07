@@ -1,0 +1,362 @@
+.booking-history-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 6%;
+}
+
+.history-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 2.5rem;
+  letter-spacing: -1px;
+}
+
+.history-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10rem 0;
+  gap: 1.5rem;
+  color: var(--text-muted);
+}
+
+.empty-history-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 4rem 2rem;
+  text-align: center;
+  max-width: 500px;
+  margin: 4rem auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.empty-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.6;
+}
+
+.empty-history-card p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+/* Tickets Grid and Layout styling */
+.tickets-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.cinema-ticket {
+  display: grid;
+  grid-template-columns: 200px 1fr 160px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  min-height: 240px;
+}
+
+.cinema-ticket:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.light-mode .cinema-ticket {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.light-mode .cinema-ticket:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+/* Poster block */
+.ticket-poster-side {
+  position: relative;
+  height: 100%;
+}
+
+.ticket-poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.poster-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0,0,0,0) 30%, rgba(20,20,25,0.95) 100%);
+}
+
+.light-mode .poster-overlay {
+  background: linear-gradient(to right, rgba(255,255,255,0) 30%, rgba(255,255,255,0.95) 100%);
+}
+
+/* Info block */
+.ticket-info-side {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  z-index: 2;
+}
+
+.ticket-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ticket-cinema-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--accent-red);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ticket-movie-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.light-mode .ticket-movie-title {
+  color: #111827;
+}
+
+.ticket-body {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.info-row {
+  display: flex;
+  gap: 2rem;
+}
+
+.info-row.split {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.info-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.info-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.info-val {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.light-mode .info-val {
+  color: #374151;
+}
+
+.info-val.highlight {
+  color: var(--accent-gold);
+}
+
+.info-val.seats-highlight {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: inline-block;
+}
+
+.light-mode .info-val.seats-highlight {
+  color: #111827;
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.info-val.price-highlight {
+  color: var(--accent-emerald);
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.footer-info {
+  margin-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 0.75rem;
+}
+
+.light-mode .footer-info {
+  border-top-color: rgba(0, 0, 0, 0.06);
+}
+
+.date-booked {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Tear off Ticket Stub & Barcode side */
+.ticket-stub-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.light-mode .ticket-stub-side {
+  background: rgba(0, 0, 0, 0.015);
+}
+
+.stub-divider {
+  position: absolute;
+  top: 0;
+  left: -1px;
+  bottom: 0;
+  width: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashed-line {
+  flex-grow: 1;
+  width: 0;
+  border-left: 2px dashed rgba(255, 255, 255, 0.1);
+  margin: 15px 0;
+}
+
+.light-mode .dashed-line {
+  border-left-color: rgba(0, 0, 0, 0.08);
+}
+
+.notch {
+  width: 20px;
+  height: 20px;
+  background: var(--bg-color);
+  border-radius: 50%;
+  position: absolute;
+  left: -10px;
+  z-index: 10;
+  border: 1px solid var(--card-border);
+}
+
+.notch-top {
+  top: -10px;
+  clip-path: circle(50% at 50% 100%);
+}
+
+.notch-bottom {
+  bottom: -10px;
+  clip-path: circle(50% at 50% 0);
+}
+
+.stub-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.barcode-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  transform: rotate(-90deg); /* Rotate barcode vertical */
+  white-space: nowrap;
+}
+
+.barcode-lines {
+  display: flex;
+  align-items: flex-end;
+  height: 38px;
+  gap: 2.5px;
+}
+
+.bar {
+  display: block;
+  height: 100%;
+  background: var(--text-color);
+  opacity: 0.75;
+}
+
+.bar.thick {
+  width: 4px;
+}
+
+.bar.thin {
+  width: 1.5px;
+}
+
+.barcode-text {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+/* Responsiveness */
+@media (max-width: 860px) {
+  .cinema-ticket {
+    grid-template-columns: 1fr;
+  }
+  .ticket-poster-side {
+    height: 160px;
+  }
+  .poster-overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 30%, rgba(20,20,25,0.98) 100%);
+  }
+  .light-mode .poster-overlay {
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 30%, rgba(255,255,255,0.98) 100%);
+  }
+  .ticket-stub-side {
+    padding: 2rem 1rem;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  }
+  .light-mode .ticket-stub-side {
+    border-top-color: rgba(0, 0, 0, 0.08);
+  }
+  .dashed-line {
+    display: none;
+  }
+  .notch {
+    display: none;
+  }
+  .barcode-container {
+    transform: none; /* Rotate back to horizontal on mobile */
+  }
+  .barcode-lines {
+    height: 30px;
+  }
+}
