@@ -1,5 +1,7 @@
 # MovieManagement — Premium Movie Management & Ticket Booking System
 
+🚀 **Live Demo**: [https://movie-managerment-system.vercel.app/](https://movie-managerment-system.vercel.app/)
+
 MovieManagement is a high-fidelity ReactJS Single-Page Application (SPA) featuring dynamic role-based authorization (Admin vs. User), interactive movie ticket bookings, complete catalog CRUD, multi-language internationalization (English & Vietnamese), light/dark mode triggers, and a premium modern user interface inspired by Figma prototypes.
 
 Built following strict **MVC (Model-View-Controller)** design architectures and **SOLID** software engineering principles, it delivers a sleek, responsive, and maintainable codebase.
