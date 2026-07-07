@@ -1,8 +1,11 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL 
-  ? `${import.meta.env.VITE_API_URL}/bookings` 
-  : 'http://localhost:5000/bookings';
+let base = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+if (base.endsWith('/')) base = base.slice(0, -1);
+if (base.endsWith('/movies')) base = base.replace('/movies', '');
+if (base.endsWith('/bookings')) base = base.replace('/bookings', '');
+
+const API_URL = `${base}/bookings`;
 
 export const bookingService = {
   async getAll() {
