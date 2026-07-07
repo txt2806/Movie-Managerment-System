@@ -8,8 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "api": "json-server --watch db.json --port 5000 --cors",
-    "start": "json-server db.json --port $PORT --cors"
+    "api": "json-server --watch db.json --port 5000",
+    "start": "json-server db.json --port $PORT --host 0.0.0.0"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.12.0",
